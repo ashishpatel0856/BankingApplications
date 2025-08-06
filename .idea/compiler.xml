@@ -5,29 +5,61 @@
       <profile default="true" name="Default" enabled="true">
         <processorPath useClasspath="false" />
       </profile>
-      <profile name="Annotation profile for Account-Service" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-        <module name="Account-Service" />
-      </profile>
       <profile name="Annotation profile for User-Service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false" useProcessorModulePath="true">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
         </processorPath>
         <module name="User-Service" />
+      </profile>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Discovery-Service" />
+      </profile>
+      <profile name="Annotation profile for Notifications-Service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
+        </processorPath>
+        <module name="Notifications-Service" />
+        <module name="Cards-Service" />
+        <module name="Loan-Service" />
+        <module name="Connection-Service" />
+        <module name="BillPay-Service" />
+      </profile>
+      <profile name="Annotation profile for Transitions-Service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
+        </processorPath>
+        <module name="Account-Service" />
+        <module name="Transitions-Service" />
+        <module name="Gatway-Service" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Account-Service" options="-parameters" />
+      <module name="BillPay-Service" options="-parameters" />
+      <module name="Cards-Service" options="-parameters" />
+      <module name="Connection-Service" options="-parameters" />
+      <module name="Discovery-Service" options="-parameters" />
+      <module name="Gatway-Service" options="-parameters" />
+      <module name="Loan-Service" options="-parameters" />
+      <module name="Notifications-Service" options="-parameters" />
+      <module name="Transitions-Service" options="-parameters" />
       <module name="User-Service" options="-parameters" />
     </option>
   </component>

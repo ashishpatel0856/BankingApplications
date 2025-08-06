@@ -2,6 +2,14 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/Account-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BillPay-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Cards-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Connection-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Discovery-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Gatway-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Loan-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Notifications-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Transitions-Service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/User-Service/src/main/java" charset="UTF-8" />
   </component>
 </project>
