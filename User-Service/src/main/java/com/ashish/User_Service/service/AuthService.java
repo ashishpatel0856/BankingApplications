@@ -10,17 +10,26 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.BadRequestException;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
-@Slf4j
+//@RequiredArgsConstructor
+//@Slf4j
 public class AuthService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final JwtService jwtService;
 
+    public AuthService(UserRepository userRepository, ModelMapper modelMapper, JwtService jwtService) {
+        this.userRepository = userRepository;
+        this.modelMapper = modelMapper;
+        this.jwtService = jwtService;
+    }
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
     public UserDto signUp(SignUpDto signUpDto) throws BadRequestException {
         log.info("signing up a user with email: {}", signUpDto.getEmail());
         if(userRepository.existsByEmail(signUpDto.getEmail())){

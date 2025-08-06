@@ -41,4 +41,43 @@ public class User {
     @Column(unique = true)
     private String phone;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public @NotBlank(message = "Name can not blank") String getName() {
+        return name;
+    }
+
+    public void setName(@NotBlank(message = "Name can not blank") String name) {
+        this.name = name;
+    }
+
+    public @NotBlank(message = "Email is required") @Email(message = "invalid email format") String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@NotBlank(message = "Email is required") @Email(message = "invalid email format") String email) {
+        this.email = email;
+    }
+
+    public @NotBlank(message = "password can not blank") @Size(min = 6, message = "password must be at least 6 characters") String getPassword() {
+        return password;
+    }
+
+    public void setPassword(@NotBlank(message = "password can not blank") @Size(min = 6, message = "password must be at least 6 characters") String password) {
+        this.password = password;
+    }
+
+    public @NotBlank(message = "Phone number is required") @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits") String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(@NotBlank(message = "Phone number is required") @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits") String phone) {
+        this.phone = phone;
+    }
 }
