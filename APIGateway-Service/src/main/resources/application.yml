@@ -33,3 +33,41 @@ spring:
             - Path=/api/v1/transitions/**
           filters:
             - StripPrefix=2
+
+
+
+        - id: notifications-service
+          uri: lb://NOTIFICATIONS-SERVICE
+          predicates:
+            - path=/api/v1/notifications/**
+          filters:
+            - StripPrefix=2
+
+
+
+        - id: loan-service
+          uri: lb://LOAN-SERVICE
+          predicates:
+            - path=/api/v1/loans/**
+          filters:
+            - StripPrefix=2
+
+
+
+
+        - id: cards-service
+          uri: lb://CARDS-SERVICE
+          predicates:
+            - path=/api/v1/cards
+          filters:
+            - StripPrefix=2
+
+
+
+
+        - id: billPay-service
+          uri: lb://BILLPAY-SERVICE
+          predicates:
+            - path=/api/v1/billPays/**
+          filters:
+            - StripPrefix=2
