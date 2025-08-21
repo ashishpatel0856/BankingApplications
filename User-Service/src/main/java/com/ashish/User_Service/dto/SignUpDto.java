@@ -7,6 +7,7 @@ public class SignUpDto {
     private String name;
     private String email;
     private String password;
+    private String phone;
 
     public String getName() {
         return name;
@@ -30,5 +31,13 @@ public class SignUpDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

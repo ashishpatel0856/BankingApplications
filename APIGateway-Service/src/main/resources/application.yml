@@ -1,9 +1,16 @@
-spring.application.name: APIGateway-Service
-
-server.port: 8080
-eureka.client.service-url.defaultZone: http://localhost:8761/eureka
-
 spring:
+  application:
+    name: APIGateway-Service
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+
   cloud:
     gateway:
       routes:
@@ -26,7 +33,6 @@ spring:
 
 
 
-
         - id: transitions-service
           uri: lb://TRANSITIONS-SERVICE
           predicates:
@@ -36,10 +42,11 @@ spring:
 
 
 
+
         - id: notifications-service
           uri: lb://NOTIFICATIONS-SERVICE
           predicates:
-            - path=/api/v1/notifications/**
+            - Path=/api/v1/notifications/**
           filters:
             - StripPrefix=2
 
@@ -48,9 +55,10 @@ spring:
         - id: loan-service
           uri: lb://LOAN-SERVICE
           predicates:
-            - path=/api/v1/loans/**
+            - Path=/api/v1/loans/**
           filters:
             - StripPrefix=2
+
 
 
 
@@ -58,9 +66,10 @@ spring:
         - id: cards-service
           uri: lb://CARDS-SERVICE
           predicates:
-            - path=/api/v1/cards
+            - Path=/api/v1/cards/**
           filters:
             - StripPrefix=2
+
 
 
 
@@ -68,6 +77,6 @@ spring:
         - id: billPay-service
           uri: lb://BILLPAY-SERVICE
           predicates:
-            - path=/api/v1/billPays/**
+            - Path=/api/v1/billPays/**
           filters:
             - StripPrefix=2

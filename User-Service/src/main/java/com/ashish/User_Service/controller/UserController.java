@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 //@RequiredArgsConstructor
 @RestController
-@RequestMapping("/Auth")
+@RequestMapping("/auth")
 public class UserController {
     private final AuthService authService;
 
@@ -23,7 +23,7 @@ public class UserController {
         this.authService = authService;
     }
 
-    @PostMapping("/signing")
+    @PostMapping("/signUp")
     public ResponseEntity<UserDto> signUp(@RequestBody SignUpDto signUpDto) throws BadRequestException {
         UserDto userDto = authService.signUp(signUpDto);
         return new ResponseEntity<>(userDto, HttpStatus.CREATED);
