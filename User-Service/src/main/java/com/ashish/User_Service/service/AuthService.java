@@ -6,8 +6,6 @@ import com.ashish.User_Service.dto.UserDto;
 import com.ashish.User_Service.entity.User;
 import com.ashish.User_Service.repository.UserRepository;
 import com.ashish.User_Service.util.BCrypt;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.BadRequestException;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;

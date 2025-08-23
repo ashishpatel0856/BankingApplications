@@ -1,5 +1,6 @@
 package com.ashish.User_Service.entity;
 
+import com.ashish.Account_Service.entity.BankAccount;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -9,6 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -40,6 +43,9 @@ public class User {
     @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits")
     @Column(unique = true)
     private String phone;
+
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<BankAccount> accounts;
 
     public Long getId() {
         return id;

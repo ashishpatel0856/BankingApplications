@@ -4,7 +4,7 @@ import com.ashish.User_Service.dto.LoginDto;
 import com.ashish.User_Service.dto.SignUpDto;
 import com.ashish.User_Service.dto.UserDto;
 import com.ashish.User_Service.service.AuthService;
-import lombok.RequiredArgsConstructor;
+
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
