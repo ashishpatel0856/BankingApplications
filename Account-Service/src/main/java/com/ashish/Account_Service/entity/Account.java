@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
 
 @Data
 @Entity
@@ -15,7 +14,7 @@ import org.apache.catalina.User;
 @AllArgsConstructor
 @Builder
 @Table(name = "bank_accounts")
-public class BankAccount {
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,7 +32,6 @@ public class BankAccount {
     @PositiveOrZero(message = "balance always be positively")
     private Double balance =0.0;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id",nullable = false)
-//    private User user;
+    @Column(unique = true, nullable = false)
+    private Long userId;
 }
