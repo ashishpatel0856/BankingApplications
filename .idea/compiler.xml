@@ -29,7 +29,7 @@
         </processorPath>
         <module name="Transitions-Service" />
       </profile>
-      <profile name="Annotation profile for Account-Service" enabled="true">
+      <profile name="Annotation profile for APIGateway-Service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
