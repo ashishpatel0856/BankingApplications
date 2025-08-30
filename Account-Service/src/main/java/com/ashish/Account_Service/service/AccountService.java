@@ -44,7 +44,6 @@ public class AccountService {
               .map(account -> modelMapper.map(account,AccountDto.class))
               .collect(Collectors.toList());
 
-
     }
 
 

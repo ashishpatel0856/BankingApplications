@@ -1,5 +1,6 @@
 package com.ashish.User_Service.service;
 
+import com.ashish.User_Service.dto.AuthResponseDto;
 import com.ashish.User_Service.dto.LoginDto;
 import com.ashish.User_Service.dto.SignUpDto;
 import com.ashish.User_Service.dto.UserDto;
@@ -28,28 +29,38 @@ public class AuthService {
     }
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
-    public UserDto signUp(SignUpDto signUpDto) throws BadRequestException {
-        log.info("signing up a user with email: {}", signUpDto.getEmail());
-        if(userRepository.existsByEmail(signUpDto.getEmail())){
-            throw new BadRequestException("Email has been already exists");
-        }
+
+    public UserDto signUp(SignUpDto signUpDto) throws RuntimeException {
+
+        if (userRepository.existsByEmail(signUpDto.getEmail()))
+            throw new RuntimeException("Email has already exists");
+        if (userRepository.existsByPhone(signUpDto.getPhone()))
+            throw new RuntimeException("Phone number has already exists");
+        if (userRepository.existsByAdharcardNumber(signUpDto.getAdharcardNumber()))
+            throw new RuntimeException("Adhar card number has  already exists");
+
         User user = modelMapper.map(signUpDto, User.class);
         user.setPassword(BCrypt.hash(signUpDto.getPassword()));
         user = userRepository.save(user);
+
         return modelMapper.map(user, UserDto.class);
     }
 
-    public String login(LoginDto loginDto) throws BadRequestException {
+    public AuthResponseDto login(LoginDto loginDto) throws BadRequestException {
         log.info("login a user with email: {}", loginDto.getEmail());
 
         User user = userRepository.findByEmail(loginDto.getEmail())
-                .orElseThrow(() -> new BadRequestException("incorrect email or password , please try again"));
-        boolean isPasswordMatch =BCrypt.hash(loginDto.getPassword()).equals(user.getPassword());
+                .orElseThrow(() -> new BadRequestException("Incorrect email or password, please try again"));
 
-        if(isPasswordMatch){
-            throw new BadRequestException("incorrect password , please try again");
+        boolean isPasswordMatch = BCrypt.match(loginDto.getPassword(), user.getPassword());
+
+        if (!isPasswordMatch) {
+            throw new BadRequestException("Incorrect email or password, please try again");
         }
-        return jwtService.genrateAccessToken(user);
+
+        String token= jwtService.genrateAccessToken(user);
+        return new AuthResponseDto(token , modelMapper.map(user, UserDto.class));
     }
+
 
 }
