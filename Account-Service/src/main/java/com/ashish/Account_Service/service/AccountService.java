@@ -22,24 +22,45 @@ public class AccountService {
 
     public AccountDto createNewAccount(AccountDto accountDto) {
         log.info("Creating account with userId:{}", accountDto.getUserId());
+
+        if (!checkUserExists(accountDto.getUserId())) {
+            throw new ResourceNotFoundException("User not found with id: " + accountDto.getUserId());
+        }
         Account account = modelMapper.map(accountDto, Account.class );
+        // generate random account number
+        account.setAccountNumber("ACC"+System.currentTimeMillis());
+        account.setBalance(accountDto.getBalance() != null ? accountDto.getBalance() : 0.0);
         Account savedAccount = accountRepository.save(account);
+
         return modelMapper.map(savedAccount, AccountDto.class);
 
     }
-    public AccountDto updateAccountById(Long userId,AccountDto accountDto) {
-        log.info("Updating account with userId:{}", userId);
-        Account account = accountRepository
-                .findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("Account not found with userId"));
-        modelMapper.map(accountDto,account);
-        account = accountRepository.save(account);
-        return modelMapper.map(account, AccountDto.class);
+
+    private boolean checkUserExists(Long userId) {
+        return userId != null && userId >0;
     }
 
-    public List<AccountDto> getAllAccounts() {
+    public AccountDto updateAccountById(AccountDto accountDto) {
+        log.info("Updating account with userId:{}", accountDto.getId());
+        Account account = accountRepository
+                .findById(accountDto.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Account not found with userId"));
+
+        if(accountDto.getBalance() != null){
+            account.setBalance(accountDto.getBalance());
+        }
+        if(accountDto.getAccountType() != null){
+            account.setAccountType(accountDto.getAccountType());
+        }
+        Account  updateaccount = accountRepository.save(account);
+        return modelMapper.map(updateaccount, AccountDto.class);
+    }
+
+    public List<AccountDto> getAllAccounts(Long userId) {
         log.info("Getting all accounts");
-      return accountRepository.findAll()
+        List<Account> accounts = accountRepository.findByUserId(userId);
+
+        return accounts
               .stream()
               .map(account -> modelMapper.map(account,AccountDto.class))
               .collect(Collectors.toList());

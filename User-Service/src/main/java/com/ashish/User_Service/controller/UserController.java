@@ -33,8 +33,8 @@ public class UserController {
 
     }
 
-    @GetMapping("/{id")
-    public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long id) throws BadRequestException {
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) throws BadRequestException {
         return ResponseEntity.ok(userService.getUserById(id));
     }
 

@@ -8,30 +8,44 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "bank_accounts")
+@Table(name = "accounts")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Account Number must be required")
+    private Long userId;
+
     @Column(unique = true, nullable = false)
     private String accountNumber;
 
-    @NotBlank(message = "account type must be required")
-    private String accountType;
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType;
 
-    @NotBlank(message = "bank name is required")
+    @Column( nullable = false)
     private String bankName;
 
     @PositiveOrZero(message = "balance always be positively")
-    private Double balance =0.0;
+    private Double balance ;
 
-    @Column(unique = true, nullable = false)
-    private Long userId;
+    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime updatedAt = LocalDateTime.now();
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
+
 }

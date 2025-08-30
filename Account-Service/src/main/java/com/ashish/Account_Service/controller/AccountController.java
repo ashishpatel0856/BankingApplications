@@ -23,17 +23,17 @@ public class AccountController {
 
     }
 
-    @PutMapping("/{userId}")
-    public ResponseEntity<AccountDto> updateAccountById(@PathVariable Long userId, @RequestBody AccountDto accountDto) {
-        AccountDto updatedAccountDto = accountService.updateAccountById(userId, accountDto);
+    @PutMapping("/update")
+    public ResponseEntity<AccountDto> updateAccountById( @RequestBody AccountDto accountDto) {
+        AccountDto updatedAccountDto = accountService.updateAccountById(accountDto);
         return new ResponseEntity<>(updatedAccountDto, HttpStatus.OK);
 
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<AccountDto>> getAllAccounts() {
-        List<AccountDto> accountDtos = accountService.getAllAccounts();
-        return new ResponseEntity<>(accountDtos, HttpStatus.OK);
+    @GetMapping("/all/{userId}")
+    public ResponseEntity<List<AccountDto>> getAllAccounts(@PathVariable Long userId) {
+        List<AccountDto> accounts = accountService.getAllAccounts(userId);
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 
 
