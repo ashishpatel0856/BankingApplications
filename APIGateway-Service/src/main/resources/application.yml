@@ -1,19 +1,14 @@
-spring:
-  application:
-    name: APIGateway-Service
+spring.application.name: APIGateway-Service
 
-server:
-  port: 8080
-  jwt:secretKey: ashiour0w1319=45r@(_)O)#(_5jljoijrofjmcjfjejdarir023ofk8//*/*
-
+server.port: 8080
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 
 
-
-    cloud:
+spring:
+  cloud:
     gateway:
       routes:
         - id: user-service
@@ -23,17 +18,12 @@ eureka:
           filters:
             - StripPrefix=2
 
-
-
         - id: account-service
           uri: lb://ACCOUNT-SERVICE
           predicates:
             - Path=/api/v1/accounts/**
           filters:
             - StripPrefix=2
-
-
-
 
         - id: transitions-service
           uri: lb://TRANSITIONS-SERVICE
@@ -42,17 +32,12 @@ eureka:
           filters:
             - StripPrefix=2
 
-
-
-
         - id: notifications-service
           uri: lb://NOTIFICATIONS-SERVICE
           predicates:
             - Path=/api/v1/notifications/**
           filters:
             - StripPrefix=2
-
-
 
         - id: loan-service
           uri: lb://LOAN-SERVICE
@@ -61,10 +46,6 @@ eureka:
           filters:
             - StripPrefix=2
 
-
-
-
-
         - id: cards-service
           uri: lb://CARDS-SERVICE
           predicates:
@@ -72,13 +53,10 @@ eureka:
           filters:
             - StripPrefix=2
 
-
-
-
-
         - id: billPay-service
           uri: lb://BILLPAY-SERVICE
           predicates:
             - Path=/api/v1/billPays/**
           filters:
             - StripPrefix=2
+

@@ -9,5 +9,5 @@ public class AccountDto {
     private String accountType;
     private double balance;
     private Long userId;
-    private String BankName;
+    private String bankName;
 }
