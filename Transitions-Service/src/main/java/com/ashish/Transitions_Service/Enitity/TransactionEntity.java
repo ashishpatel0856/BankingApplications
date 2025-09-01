@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="transitions")
+@Builder
 public class TransactionEntity {
     @jakarta.persistence.Id
     @Id
@@ -34,10 +36,10 @@ public class TransactionEntity {
 
     @NotBlank(message = "from account id is required")
     @Positive(message = "From account Id must be positive")
-    private Long fromAccountId;
+    private String fromAccountId;
 
     @Positive(message = "To Account ID must be positive")
-    private Long toAccountId;
+    private String toAccountId;
 
     @NotBlank(message = "status can not be null")
     @Pattern(regexp = "SUCCESS|FAILED|PENDING",
@@ -48,6 +50,8 @@ public class TransactionEntity {
     private String description;
 
     private LocalDateTime createdAt;
+
+
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDateTime.now();

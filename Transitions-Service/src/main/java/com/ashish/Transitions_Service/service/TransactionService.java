@@ -12,5 +12,6 @@ public interface TransactionService {
     TransactionResponseDto depositAmount(TransactionRequestDto transactionRequestDto);
     TransactionResponseDto withdrawAmount(TransactionRequestDto transactionRequestDto);
     TransactionResponseDto transferAmount(TransactionRequestDto transactionRequestDto);
-    List<TransactionResponseDto> getAllTransactions(Long accountId);
+    List<TransactionResponseDto> getAllTransactions(String accountId);
+
 }
