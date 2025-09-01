@@ -64,7 +64,6 @@ public class AccountService {
               .stream()
               .map(account -> modelMapper.map(account,AccountDto.class))
               .collect(Collectors.toList());
-
     }
 
 
