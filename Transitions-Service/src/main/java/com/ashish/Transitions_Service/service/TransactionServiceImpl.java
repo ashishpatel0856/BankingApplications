@@ -5,14 +5,16 @@ import com.ashish.Transitions_Service.config.AccountClient;
 import com.ashish.Transitions_Service.dto.TransactionRequestDto;
 import com.ashish.Transitions_Service.dto.TransactionResponseDto;
 import com.ashish.Transitions_Service.repository.TransactionRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+//@RequiredArgsConstructor
 @Service
 @Slf4j
 public class TransactionServiceImpl implements TransactionService {
@@ -67,7 +69,8 @@ public class TransactionServiceImpl implements TransactionService {
                 .description(transactionRequestDto.getDescription())
                 .createdAt(LocalDateTime.now())
                 .build();
-        return transactionRepository.save(transaction);
+       return transactionRepository.save(transactions);
+
    }
 
    private TransactionResponseDto mapToResponseDto(TransactionEntity tr) {
@@ -79,5 +82,6 @@ public class TransactionServiceImpl implements TransactionService {
                .createdAt(tr.getCreatedAt())
                .description(tr.getDescription())
                .build();
+
    }
 }

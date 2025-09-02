@@ -35,10 +35,8 @@ public class TransactionEntity {
     private Double amount;
 
     @NotBlank(message = "from account id is required")
-    @Positive(message = "From account Id must be positive")
     private String fromAccountId;
 
-    @Positive(message = "To Account ID must be positive")
     private String toAccountId;
 
     @NotBlank(message = "status can not be null")
