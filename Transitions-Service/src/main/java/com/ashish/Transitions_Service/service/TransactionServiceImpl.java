@@ -1,5 +1,6 @@
 package com.ashish.Transitions_Service.service;
 
+import com.ashish.Account_Service.dto.AccountDto;
 import com.ashish.Transitions_Service.Enitity.TransactionEntity;
 import com.ashish.Transitions_Service.config.AccountClient;
 import com.ashish.Transitions_Service.dto.TransactionRequestDto;
@@ -29,6 +30,9 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public TransactionResponseDto depositAmount(TransactionRequestDto transactionRequestDto) {
         //account balance increase
+        if (transactionRequestDto.getAmount() <= 0) {
+            throw new IllegalArgumentException("Amount must be greater than zero");
+        }
         accountClient.increaseBalance(transactionRequestDto.getFromAccountId(), transactionRequestDto.getAmount());
 
         TransactionEntity savedtransactionEntity = saveTransactionAmount("DEPOSIT",transactionRequestDto,"SUCCESS");
@@ -37,6 +41,16 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public TransactionResponseDto withdrawAmount(TransactionRequestDto transactionRequestDto) {
+        // 1. Account details fetch karo
+        AccountDto accountDto = accountClient.getAccountById(transactionRequestDto.getFromAccountId());
+
+        // 2. Balance check karo
+        if (accountDto.getBalance() < transactionRequestDto.getAmount()) {
+            throw new InsufficientBalanceException("Not enough balance in your account");
+        }
+
+
+
         accountClient.decreaseBalance(transactionRequestDto.getFromAccountId(), transactionRequestDto.getAmount());
         TransactionEntity transactionEntity = saveTransactionAmount("WITHDRAW",transactionRequestDto,"SUCCESS");
 

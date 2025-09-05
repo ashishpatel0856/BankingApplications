@@ -1,5 +1,6 @@
 package com.ashish.Transitions_Service.config;
 
+import com.ashish.Account_Service.dto.AccountDto;
 import org.springframework.cloud.openfeign.FeignClient;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,4 +16,6 @@ public interface AccountClient {
 
     @PostMapping("/{id}/decreaseBalance")
     void decreaseBalance(@PathVariable String id, @RequestParam Double amount);
+
+    AccountDto getAccountById(String fromAccountId);
 }
