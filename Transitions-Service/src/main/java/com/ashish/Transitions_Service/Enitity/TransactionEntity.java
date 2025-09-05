@@ -9,9 +9,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -20,38 +20,34 @@ import java.time.LocalDateTime;
 @Table(name="transitions")
 @Builder
 public class TransactionEntity {
-    @jakarta.persistence.Id
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String transactionId;
 
-    @NotBlank(message = "transaction type can not bhi null")
     @Pattern(regexp = "DEPOSIT|WITHDRAWAL|TRANSFER",
                                        message = "transaction type must be deposit , withdrawal,transfer")
     private String transactionType;
 
-    @NotBlank(message = "amount can not be null")
     @Positive(message = "amount always must be greater than 0")
     private Double amount;
 
-    @NotBlank(message = "from account id is required")
     private String fromAccountId;
 
     private String toAccountId;
 
-    @NotBlank(message = "status can not be null")
     @Pattern(regexp = "SUCCESS|FAILED|PENDING",
                         message = "status must be compulsory")
     private String status;
 
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 200)
     private String description;
 
     private LocalDateTime createdAt;
 
-
     @PrePersist
     public void prePersist() {
+        if (this.transactionId == null) {
+            this.transactionId = UUID.randomUUID().toString();
+        }
         this.createdAt = LocalDateTime.now();
     }
 

@@ -5,13 +5,13 @@ import com.ashish.Transitions_Service.config.AccountClient;
 import com.ashish.Transitions_Service.dto.TransactionRequestDto;
 import com.ashish.Transitions_Service.dto.TransactionResponseDto;
 import com.ashish.Transitions_Service.repository.TransactionRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 //@RequiredArgsConstructor
@@ -28,9 +28,11 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public TransactionResponseDto depositAmount(TransactionRequestDto transactionRequestDto) {
+        //account balance increase
         accountClient.increaseBalance(transactionRequestDto.getFromAccountId(), transactionRequestDto.getAmount());
-        TransactionEntity transactionEntity = saveTransactionAmount("DEPOSIT",transactionRequestDto,"SUCCESS");
-        return mapToResponseDto(transactionEntity);
+
+        TransactionEntity savedtransactionEntity = saveTransactionAmount("DEPOSIT",transactionRequestDto,"SUCCESS");
+        return mapToResponseDto(savedtransactionEntity);
     }
 
     @Override
@@ -74,7 +76,7 @@ public class TransactionServiceImpl implements TransactionService {
    }
    private TransactionResponseDto mapToResponseDto(TransactionEntity tr) {
        return TransactionResponseDto.builder()
-               .transactionId(String.valueOf(tr.getId()))
+               .transactionId(String.valueOf(tr.getTransactionId()))
                .transactionType(tr.getTransactionType())
                .amount(tr.getAmount())
                .status(tr.getStatus())
