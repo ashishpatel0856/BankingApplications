@@ -67,4 +67,23 @@ public class AccountService {
     }
 
 
+    public void increaseBalance(String accountId, Double amount) {
+        Account account = accountRepository.findByAccountNumber(accountId)
+                .orElseThrow(() -> new RuntimeException("Account not found"));
+
+        account.setBalance(account.getBalance() + amount);
+        accountRepository.save(account);
+    }
+
+    public void decreaseBalance(String accountId, Double amount) {
+        Account account = accountRepository.findByAccountNumber(accountId)
+                .orElseThrow(() -> new RuntimeException("Account not found"));
+
+        if (account.getBalance() < amount) {
+            throw new RuntimeException("Insufficient balance");
+        }
+
+        account.setBalance(account.getBalance() - amount);
+        accountRepository.save(account);
+    }
 }

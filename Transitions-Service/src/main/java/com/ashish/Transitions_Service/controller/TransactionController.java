@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RestController("/transaction")
+@RestController
 public class TransactionController {
     private final TransactionService transactionService;
 
@@ -32,7 +32,7 @@ public class TransactionController {
         return ResponseEntity.ok(transactionService.transferAmount(transactionRequestDto));
     }
 
-    @GetMapping("/history")
+    @GetMapping("/history/{accountId}")
     public ResponseEntity<List<TransactionResponseDto>> getTransactionHistory(@PathVariable String accountId) {
         return ResponseEntity.ok(transactionService.getAllTransactions(accountId));
     }

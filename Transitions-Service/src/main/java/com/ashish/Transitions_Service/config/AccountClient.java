@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name="ACCOUNT-SERVICE")
 public interface AccountClient {
 
-    @PostMapping("/api/v1/accounts/{id}/increaseBalance")
-    void increaseBalance(@PathVariable Long id, @RequestParam Double amount);
+    @PostMapping("/{id}/increaseBalance")
+    void increaseBalance(@PathVariable String id, @RequestParam Double amount);
 
-    @PostMapping("/api/v1/accounts/{id}/decreaseBalance")
-    void decreaseBalance(@PathVariable Long id, @RequestParam Double amount);
+    @PostMapping("/{id}/decreaseBalance")
+    void decreaseBalance(@PathVariable String id, @RequestParam Double amount);
 }

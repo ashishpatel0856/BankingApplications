@@ -28,7 +28,7 @@ spring:
         - id: transitions-service
           uri: lb://TRANSITIONS-SERVICE
           predicates:
-            - Path=/api/v1/transitions/**
+            - Path=/api/v1/transaction/**
           filters:
             - StripPrefix=2
 

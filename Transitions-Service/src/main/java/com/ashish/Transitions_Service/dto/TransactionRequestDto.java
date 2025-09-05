@@ -7,7 +7,7 @@ public class TransactionRequestDto {
 
     private String transactionType;
     private Double amount;
-    private Long fromAccountId;
-    private Long toAccountId;
+    private String fromAccountId;
+    private String toAccountId;
     private String description;
 }

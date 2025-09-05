@@ -35,6 +35,16 @@ public class AccountController {
         List<AccountDto> accounts = accountService.getAllAccounts(userId);
         return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
+    @PostMapping("/{id}/increaseBalance")
+    public ResponseEntity<Void> increaseBalance(@PathVariable String id, @RequestParam Double amount) {
+        accountService.increaseBalance(id, amount);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
+    @PostMapping("/{id}/decreaseBalance")
+    public ResponseEntity<Void> decreaseBalance(@PathVariable String id, @RequestParam Double amount) {
+        accountService.decreaseBalance(id, amount);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
-}
+    }
