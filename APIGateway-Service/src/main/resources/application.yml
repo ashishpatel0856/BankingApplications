@@ -1,7 +1,8 @@
 spring.application.name: APIGateway-Service
 
 server.port: 8080
-eureka:
+jwt:
+  secretKey: ashiour0w1319=45r@(_)O)#(_5jljoijrofjmcjfjejdarir023ofk8//*/*:eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
