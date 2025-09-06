@@ -3,18 +3,21 @@ package com.ashish.Transitions_Service.controller;
 
 import com.ashish.Transitions_Service.dto.TransactionRequestDto;
 import com.ashish.Transitions_Service.dto.TransactionResponseDto;
+import com.ashish.Transitions_Service.exceptions.InsufficientBalanceException;
 import com.ashish.Transitions_Service.service.TransactionService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-@RequiredArgsConstructor
 @RestController
 public class TransactionController {
     private final TransactionService transactionService;
+
+    public TransactionController(TransactionService transactionService) {
+        this.transactionService = transactionService;
+    }
+
 
     @PostMapping("/deposit")
     public ResponseEntity<TransactionResponseDto> depositAmount(@RequestBody TransactionRequestDto transactionRequestDto) {
@@ -23,7 +26,7 @@ public class TransactionController {
     }
 
     @PostMapping("/withdraw")
-    public ResponseEntity<TransactionResponseDto> withdrawAmount(@RequestBody TransactionRequestDto transactionRequestDto) {
+    public ResponseEntity<TransactionResponseDto> withdrawAmount(@RequestBody TransactionRequestDto transactionRequestDto) throws InsufficientBalanceException {
         return ResponseEntity.ok(transactionService.withdrawAmount(transactionRequestDto));
     }
 

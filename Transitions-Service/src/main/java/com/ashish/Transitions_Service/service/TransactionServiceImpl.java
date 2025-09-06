@@ -5,6 +5,7 @@ import com.ashish.Transitions_Service.Enitity.TransactionEntity;
 import com.ashish.Transitions_Service.config.AccountClient;
 import com.ashish.Transitions_Service.dto.TransactionRequestDto;
 import com.ashish.Transitions_Service.dto.TransactionResponseDto;
+import com.ashish.Transitions_Service.exceptions.InsufficientBalanceException;
 import com.ashish.Transitions_Service.repository.TransactionRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,7 +41,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public TransactionResponseDto withdrawAmount(TransactionRequestDto transactionRequestDto) {
+    public TransactionResponseDto withdrawAmount(TransactionRequestDto transactionRequestDto) throws InsufficientBalanceException {
         // 1. Account details fetch karo
         AccountDto accountDto = accountClient.getAccountById(transactionRequestDto.getFromAccountId());
 
