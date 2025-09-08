@@ -48,6 +48,7 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public List<LoanResponseDto> getAllLoan() {
+        log.info("find all applying loan");
         return loanRepository.findAll()
                 .stream()
                 .map(this::toResponse)
@@ -58,6 +59,7 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public List<LoanResponseDto> getLoanByUserId(Long userId) {
+        log.info("find all applying loan by id:{}", userId);
         return loanRepository.findByUserId(userId)
                 .stream()
                 .map(this::toResponse)
@@ -66,6 +68,7 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public LoanResponseDto updateLoan(Long id, LoanRequestDto loanRequestDto) {
+        log.info("updating loan by id:{}", id);
         LoanEntity loan = loanRepository.findById(id)
                 .orElseThrow(() -> new LoanNotFoundException("Loan is not found with id" +id));
         loan.setAmount(loanRequestDto.getAmount());
@@ -80,10 +83,12 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public void deletionOfLoan(Long id) {
+        log.info("deleting loan by id:{}", id);
         if (!loanRepository.existsById(id)) {
             throw new RuntimeException("Loan not found with id" + id);
         }
         loanRepository.deleteById(id);
+
     }
 
     private LoanResponseDto toResponse(LoanEntity loanEntity) {
