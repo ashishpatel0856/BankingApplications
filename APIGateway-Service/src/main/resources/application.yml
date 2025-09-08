@@ -48,6 +48,7 @@ spring:
             - Path=/api/v1/loans/**
           filters:
             - StripPrefix=2
+            - name: AuthenticationFilter
 
         - id: cards-service
           uri: lb://CARDS-SERVICE

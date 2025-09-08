@@ -34,11 +34,12 @@ public class LoanController {
         return new ResponseEntity<>(loanResponseDtoList, HttpStatus.OK);
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<LoanResponseDto> getLoanByUserId(@PathVariable Long userId) {
-        LoanResponseDto loan = (LoanResponseDto) loanService.getLoanByUserId(userId);
-        return new ResponseEntity<>(loan, HttpStatus.OK);
+    @GetMapping("/userId/{userId}")
+    public ResponseEntity<List<LoanResponseDto>> getLoansByUserId(@PathVariable Long userId) {
+        List<LoanResponseDto> loans = loanService.getLoanByUserId(userId);
+        return new ResponseEntity<>(loans, HttpStatus.OK);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<LoanResponseDto> updateLoan(@PathVariable Long id, @Valid @RequestBody LoanRequestDto loanRequestDto) {
