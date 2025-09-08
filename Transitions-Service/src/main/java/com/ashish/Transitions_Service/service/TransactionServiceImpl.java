@@ -7,26 +7,23 @@ import com.ashish.Transitions_Service.dto.TransactionRequestDto;
 import com.ashish.Transitions_Service.dto.TransactionResponseDto;
 import com.ashish.Transitions_Service.exceptions.InsufficientBalanceException;
 import com.ashish.Transitions_Service.repository.TransactionRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 @Service
 @Slf4j
 public class TransactionServiceImpl implements TransactionService {
     private final TransactionRepository transactionRepository;
     private final AccountClient accountClient;
 
-    public TransactionServiceImpl(TransactionRepository transactionRepository, AccountClient accountClient) {
-        this.transactionRepository = transactionRepository;
-        this.accountClient = accountClient;
-    }
+
 
     @Override
     public TransactionResponseDto depositAmount(TransactionRequestDto transactionRequestDto) {

@@ -19,14 +19,25 @@ public class LoanEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private Long userId;
 
+    @Column(nullable = false)
     private Double amount;
 
+    @Column(nullable = false)
     private Double interestRate;
 
-    private Integer loanDuration;
+    @Column(nullable = false)
+    private Integer loanDuration; // months
 
+    @Column(nullable = false)
     private LocalDate startDate;
+
+    @Column(nullable = false)
     private String status;
+
+    @Column(nullable = false)
+    private String loanType;
+
 }

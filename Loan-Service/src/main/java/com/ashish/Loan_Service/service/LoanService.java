@@ -13,4 +13,5 @@ public interface LoanService {
     List<LoanResponseDto> getAllLoan();
     List<LoanResponseDto> getLoanByUserId(Long userId);
     LoanResponseDto updateLoan(Long id,LoanRequestDto loanRequestDto);
+     void deletionOfLoan(Long id);
  }

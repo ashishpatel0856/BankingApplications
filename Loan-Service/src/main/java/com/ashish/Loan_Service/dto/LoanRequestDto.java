@@ -11,15 +11,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class LoanRequestDto {
-    @NotBlank(message = "userId must be required")
+
+    @NotNull(message = "userId is required")
     private Long userId;
 
-    @NotBlank(message = "principal amount is required")
+
+    @NotNull(message = "Loan amount is required")
     @Min(value =10000,message = "minimum amount is 10000")
     private Double amount;
 
 
-    @NotBlank
+    @NotNull(message = "loan durations is required")
     @Min(value = 1,message = "durations atleast 1 months")
     private Integer loanDuration;
 
@@ -27,4 +29,8 @@ public class LoanRequestDto {
     @DecimalMin(value="5.0",message = "interest rate must be >=5.0")
     @DecimalMax(value="25.0",message = "interest rate must be <=5.0")
     private Double interestRate;
+
+
+    @NotBlank(message = "Loan type is required")
+    private String loanType;
 }

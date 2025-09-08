@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,6 +17,8 @@ public class LoanResponseDto {
     private Long userId;
     private Double amount;
     private Double interestRate;
-    private Double timeDuration;
+    private LocalDate startDate;
+    private Integer loanDuration;
     private String status;
+    private String loanType;
 }
