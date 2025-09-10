@@ -18,8 +18,8 @@ public class CardResponseDto {
     private String cardNumber;
     private CardType cardType;
     private String cardToken;
-    private CardStatus cardStatus;
+    private CardStatus status;
     private Double creditLimit;
-    private Double availableCreditLimit;
+    private Double availableLimit;
 
 }

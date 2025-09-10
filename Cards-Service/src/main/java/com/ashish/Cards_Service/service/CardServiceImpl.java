@@ -11,6 +11,6 @@ public interface CardServiceImpl {
 
     CardResponseDto createdCard(CardRequestDto cardRequestDto);
     List<CardResponseDto> getUserCardByUserId(Long userId);
-    CardRequestDto getCardById(Long id);
+    CardResponseDto getCardById(Long id);
     CardResponseDto updateCardByUserId(CardRequestDto cardRequestDto);
 }
