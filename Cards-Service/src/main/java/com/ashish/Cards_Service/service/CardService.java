@@ -5,6 +5,8 @@ import com.ashish.Cards_Service.dto.CardResponseDto;
 import com.ashish.Cards_Service.entity.AuditInfo;
 import com.ashish.Cards_Service.entity.CardEntity;
 import com.ashish.Cards_Service.entity.CardStatus;
+import com.ashish.Cards_Service.exceptions.CardBlockedException;
+import com.ashish.Cards_Service.exceptions.InvalidRequestException;
 import com.ashish.Cards_Service.exceptions.ResourceNotFoundException;
 import com.ashish.Cards_Service.repository.CardRepository;
 import lombok.RequiredArgsConstructor;
@@ -66,20 +68,24 @@ public class CardService implements CardServiceImpl {
     @Override
     public CardResponseDto updateCardByUserId(Long id,CardRequestDto cardRequestDto) {
         log.info("updating card by id: {}",id);
-        CardEntity existingCard = cardRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Card not found with card is"+id ));
 
-        if(cardRequestDto.getCreditLimit() != null) {
-            existingCard.setCreditLimit(cardRequestDto.getCreditLimit());
-            existingCard.setAvailableLimit(cardRequestDto.getCreditLimit());
+        CardEntity existingCard = cardRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Card not found with id: " + id));
+
+        if (existingCard.getStatus() == CardStatus.BLOCKED) {
+            throw new CardBlockedException("This card is blocked. Update not allowed.");
         }
+
+        if (cardRequestDto.getCreditLimit() != null && cardRequestDto.getCreditLimit() < 5000) {
+            throw new InvalidRequestException("Credit limit must be >= 5000");
+        }
+        existingCard.setCreditLimit(cardRequestDto.getCreditLimit());
+        existingCard.setAvailableLimit(cardRequestDto.getCreditLimit());
+
         if(cardRequestDto.getCardType() != null) {
             existingCard.setCardToken(cardRequestDto.getCardType());
         }
 
-        if(cardRequestDto.getStatus() != null){
-            existingCard.setStatus(cardRequestDto.getStatus());
-        }
 
         AuditInfo auditInfo = existingCard.getAuditInfo();
         auditInfo.setCreatedAt(LocalDateTime.now());
