@@ -1,5 +1,6 @@
 package com.ashish.Cards_Service.dto;
 
+import com.ashish.Cards_Service.entity.CardStatus;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -19,4 +20,6 @@ public class CardRequestDto {
 
     @Min(value=5000,message = "minimum limit must be 5000>=amount")
     private Double creditLimit;
+    private CardStatus status;
+
 }
